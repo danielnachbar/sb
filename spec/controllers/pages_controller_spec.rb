@@ -10,10 +10,15 @@ describe PagesController do
       response.should be_success
     end
     
-    # it "should have the right title" do
-    #   get 'home'
-    #   response.should have_selector("title", :content => /home/i)
-    # end
+    it "should have the right title" do
+      get 'home'
+#      response.should have_selector("title", :content => "/home/i")
+#      response.should have_selector("title") contain(/home/i)
+      
+      response.should have_selector("title") do |title|
+        title.should contain(/home/i)
+      end
+    end
   end
 
   describe "GET 'contact'" do

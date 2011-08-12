@@ -1,14 +1,14 @@
 class PagesController < ApplicationController
   def home
-    @title = "SpiffyBooks Home"
+    @title = "Spiffy Books Home"
   end
 
   def contact
-    @title = "SpiffyBooks Contact"   
+    @title = "Contact"   
   end
 
   def about
-    @title = "About SpiffyBooks"    
+    @title = "About"    
   end
 
 end
