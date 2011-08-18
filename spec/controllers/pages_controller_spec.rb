@@ -26,6 +26,14 @@ describe PagesController do
       get 'contact'
       response.should be_success
     end
+    
+    it "should have the right title" do
+      get 'contact'
+      response.should have_selector("title") do |title|
+        title.should contain(/contact/i)
+      end 
+    end   
+    
   end
 
   describe "GET 'about'" do
@@ -33,6 +41,14 @@ describe PagesController do
       get 'about'
       response.should be_success
     end
+    it "should have the right title" do
+      get 'about'
+      response.should have_selector("title") do |title|
+        title.should contain(/about/i)
+      end 
+    end    
+    
+    
   end
 
 end
