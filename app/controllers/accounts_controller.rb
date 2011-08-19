@@ -1,4 +1,16 @@
 class AccountsController < ApplicationController
+  
+  def index
+    @accounts = Account.all
+    @title = "All Accounts"
+  end
+  
+  def show
+    @account = Account.find(params[:id])
+    @title = @account.name
+
+  end
+  
   def new
     @account = Account.new
     @title = "Set Up Account"

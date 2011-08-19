@@ -46,9 +46,8 @@ describe PagesController do
       response.should have_selector("title") do |title|
         title.should contain(/about/i)
       end 
-    end    
-    
-    
+    end  
+#    it "should have a link to the Accounts Page"
   end
 
 end
