@@ -1,5 +1,5 @@
 Sb::Application.routes.draw do
-  get "accounts/new"
+  resources :accounts
 
   root :to => "pages#home"
 

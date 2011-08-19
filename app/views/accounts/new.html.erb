@@ -1,2 +1,17 @@
-<h1>Accounts#new</h1>
-<p>Find me in app/views/accounts/new.html.erb</p>
+<h1>Create an Account</h1>
+
+<%= form_for(@account) do |f| %>
+
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :atype, "Type" %><br />
+  <%= f.text_field :atype %>
+</div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>  
+<% end %>
