@@ -8,7 +8,6 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find(params[:id])
     @title = @account.name
-
   end
   
   def new
@@ -20,9 +19,14 @@ class AccountsController < ApplicationController
     @account = Account.new(params[:account])
     
     if (@account.save)
-      redirect_to root_path, :flash => { :success => "Account created!" }
+      # @accounts = Account.all
+      # @title = "All Accounts"
+      # render :index, :flash => { :success => "Account created!" }
+      # render :new,  :flash => { :success => "Account created!" }
+      redirect_to accounts_path,  :flash => { :success => "Account created!" }      
     else
-      redirect_to root_path, :flash => { :error => "Oops!" }
+      render :new, :flash => { :error => "Oops!" } 
+      
     end
   end
 

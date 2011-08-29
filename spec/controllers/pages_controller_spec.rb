@@ -19,6 +19,14 @@ describe PagesController do
         title.should contain(/home/i)
       end
     end
+    
+    it "should have a link to the Accounts Page" do
+      get 'home'
+      response.should have_selector('a', :href => "/accounts",
+                                         :content => "Accounts")      
+    end
+    
+    
   end
 
   describe "GET 'contact'" do
@@ -47,7 +55,6 @@ describe PagesController do
         title.should contain(/about/i)
       end 
     end  
-#    it "should have a link to the Accounts Page"
   end
 
 end
