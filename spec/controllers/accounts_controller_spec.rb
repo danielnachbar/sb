@@ -5,10 +5,10 @@ describe AccountsController do
   render_views
   
   before(":each") do
-    Account.new(:name => "test1", :atype => "asset"    ).save
-    Account.new(:name => "test2", :atype => "liability").save
-    Account.new(:name => "test3", :atype => "income"   ).save
-    Account.new(:name => "test4", :atype => "expense"  ).save
+    Account.create!(:name => "test1", :atype => "asset"    )
+    Account.create!(:name => "test2", :atype => "liability")
+    Account.create!(:name => "test3", :atype => "income"   )
+    Account.create!(:name => "test4", :atype => "expense"  )
   end
 
 
