@@ -1,4 +1,11 @@
-<p> <%= link_to "Create New Account", "accounts/new" %></p>
+
+
+<% if ((defined? flash[:success]) && (/Account .* created/ =~ flash[:success])) %>   
+<p> <%= link_to "Create Another Account", "accounts/new" %></p>      
+<% else %>        
+<p> <%= link_to "Create New Account", "accounts/new" %></p>      
+<% end%>
+
 
 <ul class="accounts">
   <%= render @accounts %>

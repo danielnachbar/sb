@@ -2,7 +2,8 @@ class AccountsController < ApplicationController
   
   def index
     @accounts = Account.all
-    @title = "All Accounts"
+    @title = "All Accounts"      
+    STDERR.puts "params is #{defined? params}"
   end
   
   def show
@@ -18,12 +19,8 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(params[:account])
     
-    if (@account.save)
-      # @accounts = Account.all
-      # @title = "All Accounts"
-      # render :index, :flash => { :success => "Account created!" }
-      # render :new,  :flash => { :success => "Account created!" }
-      redirect_to accounts_path,  :flash => { :success => "Account created!" }      
+    if (@account.save)                            
+      redirect_to account_path(@account.id), :flash => { :success => "Account #{@account.name} created!" }
     else
       render :new, :flash => { :error => "Oops!" } 
       
