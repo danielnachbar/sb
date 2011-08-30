@@ -1,0 +1,9 @@
+<h3>Choose an Account to Delete</h3>
+<ul class="accounts">        
+  <% @accounts.each do |a|%>
+   <li>    
+     <%= link_to "Delete " + a.name, a, :method => :delete, :confirm => "You sure?",
+                              :title => "Delete #{a.name}" %>   
+   </li>
+  <% end %>
+</ul>

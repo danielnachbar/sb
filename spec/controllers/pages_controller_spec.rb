@@ -22,9 +22,22 @@ describe PagesController do
     
     it "should have a link to the Accounts Page" do
       get 'home'
-      response.should have_selector('a', :href => "/accounts",
-                                         :content => "Accounts")      
-    end
+      response.should have_selector('a', :href => accounts_path,
+                                         :content => "Chart of Accounts")                                               
+    end        
+    
+    it "should have a link to the Create Account" do
+      get 'home'
+      response.should have_selector('a', :href => new_account_path,
+                                         :content => "Create Account")                                               
+    end    
+    
+    it "should have a link to the Delete Account" do
+      get 'home'
+      response.should have_selector('a', :href => '/accounts/deletelist',
+                                         :content => "Delete Account")                                               
+    end   
+     
     
     
   end

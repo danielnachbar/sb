@@ -1,3 +1,18 @@
-<h1>Spiffy Books</h1>
-<p>You are Home!</p>
-<p> <%= link_to  "Accounts" , "/accounts",%> </p>
+<table border=1>
+	<tr><td>Accounts</td><td>Transactions</td></tr>        
+  <tr>
+	<td>
+	  <%= link_to  "Chart of Accounts" , accounts_path %>       
+	</td>
+  </tr> 
+  <tr>
+	<td>
+	  <%= link_to  "Create Account" , new_account_path %>      
+	</td>
+  </tr>   
+  <tr>
+	<td>
+	  <%= link_to  "Delete Account" , '/accounts/deletelist' %>      
+	</td>
+  </tr>
+</table>

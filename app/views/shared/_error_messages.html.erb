@@ -8,7 +8,11 @@
     <p>There were problems with the following fields:</p>
     <ul>
     <% object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+		<%if /atype/i =~ message   %> 
+		  <li><%= message.sub(/atype/i,"Account type")%></li>
+	   <% else %>       
+		  <li><%= message %></li>
+		<% end %>
     <% end %>
     </ul>
   </div>
