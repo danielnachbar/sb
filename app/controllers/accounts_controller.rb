@@ -25,9 +25,9 @@ class AccountsController < ApplicationController
     
     if (@account.save)                            
       redirect_to account_path(@account.id), :flash => { :success => "Account #{@account.name} created!" }
-    else
-      render :new, :flash => { :error => "Oops!" } 
-      
+    else              
+      @title = "Create Account"
+      render :new
     end
   end    
   
@@ -36,5 +36,10 @@ class AccountsController < ApplicationController
     @account.destroy
     redirect_to deletelist_accounts_path, :flash => { :success => "Account destroyed." }         
   end  
+  
+  private
+  
+  def accounts_by_type
+  end
   
 end

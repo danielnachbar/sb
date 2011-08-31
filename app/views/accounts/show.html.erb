@@ -1,1 +1,6 @@
+
+<% if ((defined? flash[:success]) && (/Account .* created/ =~ flash[:success])) %>   
+<p> <%= link_to "Create Another Account", new_account_path %></p>       
+<% end%>
+
 <h1>Account: <%= @title %></h1>
