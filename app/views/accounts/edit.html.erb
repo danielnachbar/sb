@@ -1,0 +1,31 @@
+<h1>Edit <%= @account.name.titleize %> </h1>
+
+<%= form_for(@account) do |f| %>
+                
+
+<%= render 'shared/error_messages', :object => f.object %>
+
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+<%= f.label "Account Type" %><br />
+
+<div class="field">
+  <%= f.radio_button :atype, "asset"  %> 
+  <%= f.label "Asset"%> <br />
+
+  <%= f.radio_button :atype, "liability" %>
+  <%= f.label "Liability"%> <br />
+
+  <%= f.radio_button :atype, "income" %>
+  <%= f.label "Income"%> <br />
+
+  <%= f.radio_button :atype, "expense" %>
+  <%= f.label "Expense"%> <br />
+</div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>  
+<% end %>

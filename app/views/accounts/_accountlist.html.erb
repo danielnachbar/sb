@@ -1,0 +1,22 @@
+<% @alist.each do |t, l|%>
+  <ul class="accounts">        
+    <h3> <%= t.capitalize %> </h3>
+	<% l.each do |a| %>  
+	  <li>      
+		<% case @accountlist_type %>   
+		  <% when "delete" %>
+	        <%= link_to "Delete " + a.name.titleize, a, :method => :delete, :confirm => "You sure?",
+	                              :title => "Delete #{a.name}" %>  
+		  <% when "update" %>
+			<%= link_to "Edit " + a.name.titleize, edit_account_path(a) %>	
+	     
+		  <% else %>    
+	        <%= link_to a.name.titleize, a %>		 
+		<% end %>
+		
+	  </li>	   
+	<% end %>
+
+  </ul>
+                   
+<% end %>

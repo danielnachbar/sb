@@ -1,14 +1,18 @@
 class AccountsController < ApplicationController
   
   def index
-    @accounts = Account.all
     @title = "Chart of Accounts"     
     @alist = accounts_by_type
   end       
+
+  def updatelist                   
+    @title = "Choose an Account to Edit" 
+    @alist = accounts_by_type    
+  end               
   
   def deletelist                   
-    @accounts = Account.all
-    @title = "Choose an Account to Delete"
+    @title = "Choose an Account to Delete" 
+    @alist = accounts_by_type    
   end
   
   def show
@@ -31,6 +35,28 @@ class AccountsController < ApplicationController
       render :new
     end
   end    
+  
+  def edit   
+    @account = Account.find(params[:id])
+    @title = "Edit " + @account.name.titleize    
+  end      
+
+  # if @user.update_attributes(params[:user])
+  #   redirect_to @user, :flash => { :success => "Profile updated." }
+  # else
+  #   @title = "Edit user"
+  #   render 'edit'
+  # end   
+
+  def update       
+    @account = Account.find(params[:id])      
+    if @account.update_attributes(params[:account])                            
+      redirect_to @account, :flash => { :success => "Account #{@account.name.titleize} Updated!" }
+    else              
+      @title = "Edit Account"
+      render :edit
+    end    
+  end  
   
   def destroy
     @account = Account.find(params[:id]) 

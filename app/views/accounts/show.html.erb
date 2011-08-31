@@ -3,4 +3,6 @@
 <p> <%= link_to "Create Another Account", new_account_path %></p>       
 <% end%>
 
-<h1>Account: <%= @title %></h1>
+<h1>Account: <%= @title.titleize %></h1>       
+
+<h3> Type: <%= @account.atype.titleize %></h3>

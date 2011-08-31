@@ -30,7 +30,7 @@ describe "GET 'index'" do
     @accounts.length.should == 4
     
     @accounts.each do |account|
-      response.should have_selector('li', :content => account.name)
+      response.should have_selector('li', :content => account.name.titleize)
     end
 
   end  
@@ -55,10 +55,35 @@ describe "GET 'deletelist'" do
     @accounts.length.should == 4
     
     @accounts.each do |account|
-      response.should have_selector('li', :content => "Delete " + account.name)
+      response.should have_selector('li', :content => "Delete " + account.name.titleize)
     end
   
   end
+    
+end
+
+describe "GET 'updatelist'" do
+  
+  it "should be successful" do
+    get :updatelist
+    response.should be_success
+  end
+  
+  it "should have the right title" do
+    get :updatelist
+    response.should have_selector('title', :content => "Choose an Account to Edit")
+  end
+                 
+  it "should have an element for each account" do
+    get :updatelist
+    @accounts = Account.all
+    @accounts.length.should == 4
+    
+    @accounts.each do |account|
+      response.should have_selector('li', :content => "Edit " + account.name.titleize)
+    end
+  
+  end          
     
 end
 
@@ -85,7 +110,15 @@ end
       it "should have the right title" do
         post :create, :account => @attr
         response.should have_selector('title', :content => "Create Account")
-      end
+      end  
+      
+      # it "should destroy the account" do
+      #   lambda do
+      #     delete :destroy, :id => @a1
+      #   end.should change(Account, :count).by(-1)
+      # end         
+      
+      
       # 
       # it "should render the 'new' page" do
       #   post :create, :user => @attr
@@ -101,7 +134,70 @@ end
   end
 
 
+  describe "GET 'edit'" do
+    
+    it "should be successful" do
+      get :edit, :id => @a1
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :edit, :id => @a1
+      response.should have_selector('title', :content => "Edit "+ @a1.name.titleize)
+    end                       
+    
+  end
+
+  describe "PUT 'update'" do
+      
+  
+    # describe "failure" do
+    #   
+    #   before(:each) do
+    #     @attr = { :name => "", :atype => "" }
+    #   end
+    #   
+    #   it "should render the 'edit' page" do
+    #     put :update, :id => @user, :user => @attr
+    #     response.should render_template('edit')
+    #   end
+    #   
+    #   it "should have the right title" do
+    #     put :update, :id => @user, :user => @attr
+    #     response.should have_selector('title', :content => "Edit user")
+    #   end
+    # end 
+             
+    describe "success" do
+      
+      before(:each) do
+        @attr = { :name => "test11", :atype => "income"}
+      end
+      
+      it "should change the accounts's attributes" do
+        put :update, :id => @a1, :account => @attr
+        @a1.reload
+        @a1.name.should  == @attr[:name]
+        @a1.atype.should == @attr[:atype]
+      end
+      
+      it "should have a flash message" do
+        put :update, :id => @a1, :user => @attr
+        flash[:success].should =~ /Updated/
+      end                      
+    end               # success
+    
+                                
+  end # PUT update
+
+
   describe "GET 'destroy'" do           
+
+    it "should have the right title" do
+      get :deletelist
+      response.should have_selector('title', :content => "Choose an Account to Delete")
+    end
+
     
     it "should destroy the account" do
       lambda do
@@ -109,11 +205,6 @@ end
       end.should change(Account, :count).by(-1)
     end
     
-    # it "should redirect to the users page" do
-    #   delete :destroy, :id => @user
-    #   flash[:success].should =~ /destroyed/i
-    #   response.should redirect_to(users_path)
-    # end    
     
   end
 

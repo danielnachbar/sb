@@ -1,7 +1,9 @@
 Sb::Application.routes.draw do
         
   resources :accounts do
-    get 'deletelist', :on => :collection
+    get 'deletelist', :on => :collection       
+    get 'updatelist', :on => :collection       
+    
   end
 
   root :to => "pages#home"

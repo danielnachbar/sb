@@ -2,21 +2,10 @@
 
 <p> <%= link_to "Create Account", new_account_path %></p>     
 
-<h1>Chart of Accounts</h1>  
-
-
-<% @alist.each do |t, l|%>
-  <ul class="accounts">        
-    <h3> <%= t.capitalize %> </h3>
-	<% l.each do |a| %>  
-	  <li>
-	   <%= link_to a.name.capitalize, a %>	  
-	  </li>	   
-	<% end %>
-
-  </ul>
-                   
-<% end %>  
+<h1>  Chart of Accounts  </h1>  
+                            
+<% @accountlist_type = "basic" %>
+<%= render "accountlist" %>
 
 
   <%# if current_user.admin? %>
