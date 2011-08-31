@@ -2,10 +2,24 @@
 
 <p> <%= link_to "Create Account", new_account_path %></p>     
 
-<h3>Accounts</h3>  
+<h1>Chart of Accounts</h1>  
 
 
+<% @alist.each do |t, l|%>
+  <ul class="accounts">        
+    <h3> <%= t.capitalize %> </h3>
+	<% l.each do |a| %>  
+	  <li>
+	   <%= link_to a.name.capitalize, a %>	  
+	  </li>	   
+	<% end %>
 
-<ul class="accounts">
-  <%= render @accounts %>
-</ul>
+  </ul>
+                   
+<% end %>  
+
+
+  <%# if current_user.admin? %>
+  <%#= link_to "delete", user, :method => :delete, :confirm => "You sure?",
+                              :title => "Delete #{user.name}" %>
+  <%# end %>

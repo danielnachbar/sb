@@ -2,7 +2,8 @@ class AccountsController < ApplicationController
   
   def index
     @accounts = Account.all
-    @title = "Chart of Accounts"      
+    @title = "Chart of Accounts"     
+    @alist = accounts_by_type
   end       
   
   def deletelist                   
@@ -39,7 +40,12 @@ class AccountsController < ApplicationController
   
   private
   
-  def accounts_by_type
+  def accounts_by_type             
+    retval = {};                                      
+    %w{income expense asset liability}.each do |t|
+      retval[t] = Account.where(:atype => t)
+    end
+    retval
   end
   
 end
