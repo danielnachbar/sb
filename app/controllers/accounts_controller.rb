@@ -48,11 +48,16 @@ class AccountsController < ApplicationController
   #   render 'edit'
   # end   
 
-  def update       
+  def update    
+#    STDERR.puts "in UPDATE "              
+       
     @account = Account.find(params[:id])      
-    if @account.update_attributes(params[:account])                            
+    if @account.update_attributes(params[:account])  
+#      STDERR.puts "in IF"              
+                                
       redirect_to @account, :flash => { :success => "Account #{@account.name.titleize} Updated!" }
-    else              
+    else
+#      STDERR.puts "in ELSE"              
       @title = "Edit Account"
       render :edit
     end    

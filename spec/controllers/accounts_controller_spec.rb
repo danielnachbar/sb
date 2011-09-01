@@ -101,37 +101,67 @@ end
   end
 
   describe "POST 'create'" do 
+
     describe "failure" do
       
       before(:each) do
         @attr = { :name => "", :atype => "" }
       end
       
+      it "should render the 'edit' page" do
+        post :create, :account => @attr
+        response.should render_template(:new)
+      end      
+      
       it "should have the right title" do
         post :create, :account => @attr
         response.should have_selector('title', :content => "Create Account")
-      end  
+      end    
+
+      it "should not create an account" do  
+        lambda do
+          post :create, :account => @attr
+        end.should change(Account, :count).by(0)
+      end                          
       
-      # it "should destroy the account" do
-      #   lambda do
-      #     delete :destroy, :id => @a1
-      #   end.should change(Account, :count).by(-1)
-      # end         
+        
+    end      # create failure  
+
+             
+    describe "success" do
       
+      before(:each) do
+        @attr = { :name => "test11", :atype => "income"}
+      end
+
+      it "should create an account" do
+        lambda do
+          post :create, :account => @attr
+        end.should change(Account, :count).by(1)
+      end
+               
+      it "should redirect to the account show page" do
+        post :create, :account => @attr
+        response.should redirect_to(account_path(assigns(:account)))
+      end
       
-      # 
-      # it "should render the 'new' page" do
-      #   post :create, :user => @attr
-      #   response.should render_template('new')
-      # end
-      # 
-      # it "should not create a user" do
-      #   lambda do
-      #     post :create, :user => @attr
-      #   end.should_not change(User, :count)
-      # end           
-    end
-  end
+      it "should change the accounts's attributes" do
+        post :create, :account => @attr
+        a = Account.find_by_name(@attr[:name])
+        a.should_not be_nil                 
+        a.atype.should == @attr[:atype]
+      end             
+      
+      it "should have a flash message" do
+        post :create, :account => @attr
+        flash[:success].should =~ /Created/i
+      end                      
+    end               # success                  
+    
+ 
+ 
+    
+  end      # POST create
 
 
   describe "GET 'edit'" do
@@ -150,23 +180,33 @@ end
 
   describe "PUT 'update'" do
       
-  
-    # describe "failure" do
-    #   
-    #   before(:each) do
-    #     @attr = { :name => "", :atype => "" }
-    #   end
-    #   
-    #   it "should render the 'edit' page" do
-    #     put :update, :id => @user, :user => @attr
-    #     response.should render_template('edit')
-    #   end
-    #   
-    #   it "should have the right title" do
-    #     put :update, :id => @user, :user => @attr
-    #     response.should have_selector('title', :content => "Edit user")
-    #   end
-    # end 
+    describe "failure" do
+      
+      before(:each) do
+        @attr = { :name => "", :atype => "" }
+      end
+      
+      it "should render the 'edit' page" do
+        put :update, :id => @a1, :account => @attr
+        response.should render_template(:edit)
+      end      
+      
+      it "should have the right title" do
+        put :update, :id => @a1, :account => @attr
+        response.should have_selector('title', :content => "Edit Account")
+      end
+          
+      it "should not change the information" do  
+        saved_name = @a1.name
+        saved_atype = @a1.atype
+        put :update, :id => @a1, :account => @attr
+        @a1.name.should == saved_name
+        @a1.atype.should == saved_atype
+      end                          
+      
+        
+    end      # update failure  
+
              
     describe "success" do
       

@@ -47,12 +47,20 @@ describe "Home Page Links" do
   it "should have a working link to the Edit Account List Page" do
     visit root_path     
     click_link "Edit Account"
-    #response.should have_selector('title', :content => "Choose an Account to Delete")      
+    response.should have_selector('title', :content => "Choose an Account to Edit")      
   end      
 
  it "should have a working link to the Delete Account List Page" do
    visit root_path     
    click_link "Delete Account"
    response.should have_selector('title', :content => "Choose an Account to Delete")      
- end
+ end  
+ 
+ it "should have a working link to the Create Journal Entry Page" do
+   visit root_path     
+   click_link "Create Journal Entry"
+   # response.should have_selector('title', :content => "Create Journal Entry")      
+ end             
+ 
+ 
 end

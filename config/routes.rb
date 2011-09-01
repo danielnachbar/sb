@@ -1,6 +1,6 @@
 Sb::Application.routes.draw do
         
-  get "jes/new"
+  resources :jes
 
   resources :accounts do
     get 'deletelist', :on => :collection       

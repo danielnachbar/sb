@@ -1,5 +1,5 @@
 <table border=1>
-	<tr><td>Accounts</td><td>Transactions</td></tr>        
+	<tr><td>Accounts</td><td>Journal Entries</td></tr>        
   <tr>
 	<td>
 	  <%= link_to  "Chart of Accounts" , accounts_path %>       
@@ -8,7 +8,12 @@
   <tr>
 	<td>
 	  <%= link_to  "Create Account" , new_account_path %>      
-	</td>
+	</td>   
+	
+	<td>
+	  <%= link_to  "Create Journal Entry" , new_je_path %>      
+	</td>	
+	
   </tr>   
 </tr>   
 <tr>
