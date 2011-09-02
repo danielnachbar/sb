@@ -1,5 +1,6 @@
 class JesController < ApplicationController
-  def new           
+  def new            
+    @je = Je.new
     @title = "New Journal Entry"
   end
 
