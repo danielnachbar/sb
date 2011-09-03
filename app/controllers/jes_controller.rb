@@ -1,10 +1,21 @@
+
+class MyMoney < Money
+end
 class JesController < ApplicationController
+
+  def show            
+    @je = Je.find(params[:id])
+    @title = "New Journal Entry"          
+  end
+
   def new            
     @je = Je.new
     @title = "New Journal Entry"
   end
 
-  def create
+  def create     
+#    STDERR.puts "Param says: " + params[:je][:amount] 
+    params[:je][:amount] =   params[:je][:amount].to_money.cents.to_s # run input thorough the Money parser
     @je = Je.new(params[:je])
 
     if (@je.save)                            
