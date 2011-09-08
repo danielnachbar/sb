@@ -8,7 +8,7 @@
 <tr>
  <td colspan=2>   
 <div class="field">
-  <%= f.label "Amount (in Pennies)" %><br />
+  <%= f.label "Amount" %><br />
   <%= f.text_field :amount %>
 </div>
 </td>
@@ -42,21 +42,16 @@
   %>
 </td></tr> 
 <tr><td>   
-	<div class="demo">
 
-	<p>Date: <input type="text" id="datepicker"></p>
-
-	</div><!-- End demo -->
+  <%= f.label "Date:" %><br />
+  <%#= f.text_field :date, :id => "datepicker" %>
+  <%= f.text_field :date %>
 
 	<script>
 	$(function() {
 		$( "#datepicker" ).datepicker();
 	});
 	</script>
-
-	<div class="demo-description">
-	<p>The datepicker is tied to a standard form input field.  Focus on the input (click, or use the tab key) to open an interactive calendar in a small overlay.  Choose a date, click elsewhere on the page (blur the input), or hit the Esc key to close. If a date is chosen, feedback is shown as the input's value.</p>
-	</div><!-- End demo-description -->
 	 
 </td></tr> 
 <tr><td>

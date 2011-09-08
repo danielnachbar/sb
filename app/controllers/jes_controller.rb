@@ -15,6 +15,7 @@ class JesController < ApplicationController
 
   def create     
     params[:je][:amount] =   params[:je][:amount].to_money.cents.to_s # run input thorough the Money parser
+STDERR.puts "params[:je][:date]|" +    params[:je][:date] + "|"
     @je = Je.new(params[:je])
 
     if (@je.save)                            

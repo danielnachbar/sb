@@ -116,6 +116,7 @@ describe Je do
 
 end
 
+
 # == Schema Information
 #
 # Table name: jes
@@ -127,5 +128,6 @@ end
 #  comment    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  date       :date
 #
 

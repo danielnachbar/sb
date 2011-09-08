@@ -1,4 +1,3 @@
-
 # == Schema Information
 #
 # Table name: jes
@@ -10,7 +9,9 @@
 #  comment    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#
+#  date       :date
+#   
+
 
 class JeValidator < ActiveModel::Validator
   # implement the method where the validation logic must reside
@@ -33,7 +34,7 @@ end
 class Je < ActiveRecord::Base            
   
   
-  attr_accessible :credit, :debit, :amount, :comment
+  attr_accessible :credit, :debit, :amount, :comment, :date
   
   validates :credit, :presence => true
   validates_numericality_of :credit, :greater_than_or_equal_to => 1   
@@ -47,3 +48,6 @@ class Je < ActiveRecord::Base
   validates :comment, :length => {:maximum => 255}
 
 end
+
+
+
