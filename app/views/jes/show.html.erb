@@ -1,14 +1,22 @@
+<%= link_to  "All Journal Entries" , jes_path %>
+
 
 <% if ((defined? flash[:success]) && (/Journal Entry Created/i =~ flash[:success])) %>   
 
-<p> <%= link_to "Create Another Journal Entry", new_je_path %></p>       
-<% end%>
+<p> <%= link_to "Create Another Journal Entry", new_je_path %></p>           
+
+<% end%>   
+
+
 
 <% credit = Account.find(@je.credit)%>   
 <% debit  = Account.find(@je.debit )%>   
 
-<h3>Credit Account: <%= credit.name.titleize %></h3>       
+<h3>Id: <%= credit.id.to_s %></h3>       
+
 <h3>Debit  Account: <%= debit.name.titleize %></h3>       
+
+<h3>Credit Account: <%= credit.name.titleize %></h3>       
 
 <h3> Amount: <%= Money.new(@je.amount).format(:symbol => false) %></h3>
  

@@ -3,6 +3,11 @@ class MyMoney < Money
 end
 class JesController < ApplicationController
 
+  def index     
+    @title = "Journal Entries"
+    @jelist =  Je.all
+  end
+
   def show            
     @je = Je.find(params[:id])
     @title = "New Journal Entry"          

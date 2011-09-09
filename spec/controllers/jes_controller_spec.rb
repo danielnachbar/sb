@@ -3,7 +3,46 @@ require 'spec_helper'
 describe JesController do
    
   render_views
+  
 
+  describe "GET 'index'" do
+    
+    before(:each) do
+      @a1 = Account.create!(:name => "test1", :atype => "asset"    )
+      @a2 = Account.create!(:name => "test2", :atype => "liability")
+      @a3 = Account.create!(:name => "test3", :atype => "income"   )
+      @a4 = Account.create!(:name => "test4", :atype => "expense"  )          
+    
+      @je1 = Je.create!(:credit => @a1.id, :debit => @a2.id,
+                        :amount =>  300, :date => "09/06/2011",  :comment => "I like turtles!" ) 
+      @je2 = Je.create!(:credit => @a3.id, :debit => @a4.id,
+                        :amount =>  200, :date => "09/07/2011",  :comment => "Why so serious?" )                        
+    end
+
+    it "should be successful" do
+      get :index
+      response.should be_success
+    end               
+
+    it "should have the right title" do
+      get :index
+      response.should have_selector('title', :content => "Journal Entries")
+    end          
+
+    it "should have an element for each journal entry" do    
+                        
+      get :index
+      @jes = Je.all
+      @jes.length.should == 2
+    
+      @jes.each do |je|
+        response.should have_selector('a', :href => je_path(je),
+                                           :content => je.id.to_s)
+      end
+    
+    end          
+
+  end
 
   describe "GET 'show'" do               
     

@@ -1,0 +1,18 @@
+<% @jelist.each do |j|%>
+  <ul class="je">        
+	  <li>       
+		<%= j.debit.to_s + " "+  j.credit.to_s + " "+ j.amount.to_s + " "+ j.date.to_s + " "+ j.comment.to_s %>
+		<% case @list_type %>   
+		  <% when "delete" %>
+	        <%= link_to "Delete " + j.id.to_s, a, :method => :delete, :confirm => "You sure?",
+	                              :title => "Delete #{j.id}" %>  
+		  <% when "update" %>
+			<%= link_to "Edit " + j.id.to_s, edit_account_path(j) %>	
+	     
+		  <% else %>    
+	        <%= link_to j.id, j %>		 
+		<% end %>
+	  </li>	
+  </ul>
+                   
+<% end %>
