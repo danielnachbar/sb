@@ -38,3 +38,7 @@ class JesController < ApplicationController
 
 
 end
+
+def get_account_name_by_id(aid)    
+  Account.find(aid).name
+end

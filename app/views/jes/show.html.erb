@@ -14,9 +14,9 @@
 
 <h3>Id: <%= credit.id.to_s %></h3>       
 
-<h3>Debit  Account: <%= debit.name.titleize %></h3>       
+<h3>Debit  Account: <%= get_account_name_by_id(@je.debit).titleize %></h3>       
 
-<h3>Credit Account: <%= credit.name.titleize %></h3>       
+<h3>Credit Account: <%= get_account_name_by_id(@je.credit).titleize %></h3>       
 
 <h3> Amount: <%= Money.new(@je.amount).format(:symbol => false) %></h3>
  

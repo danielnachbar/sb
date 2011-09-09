@@ -1,7 +1,7 @@
 <% @jelist.each do |j|%>
   <ul class="je">        
 	  <li>       
-		<%= j.debit.to_s + " "+  j.credit.to_s + " "+ j.amount.to_s + " "+ j.date.to_s + " "+ j.comment.to_s %>
+		<%= get_account_name_by_id(j.debit) + " "+  get_account_name_by_id(j.credit) + " "+ Money.new(j.amount).format(:symbol => false) + " "+ j.date.to_s + " "+ j.comment.to_s %>
 		<% case @list_type %>   
 		  <% when "delete" %>
 	        <%= link_to "Delete " + j.id.to_s, a, :method => :delete, :confirm => "You sure?",
