@@ -55,7 +55,7 @@ describe JesController do
     describe "failure" do
       
       before(:each) do
-        @attr = { :credit => 0, :debit => 0, :amount => -1 }
+        @attr = { :credit => 0, :debit => 0, :amount => -1, :date => "09/02/2011"}
       end
                         
       it "should render the 'new' page" do
