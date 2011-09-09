@@ -14,8 +14,13 @@ class JesController < ApplicationController
   end
 
   def create     
-    params[:je][:amount] =   params[:je][:amount].to_money.cents.to_s # run input thorough the Money parser
-STDERR.puts "params[:je][:date]|" +    params[:je][:date] + "|"
+    params[:je][:amount] =   params[:je][:amount].to_money.cents.to_s # run input thorough the Money parser 
+    datestring = params[:je][:date]
+    params[:je][:date]   =   Date.new(datestring[6,4].to_i,datestring[0,2].to_i,datestring[3,2].to_i)
+    
+
+#STDERR.puts "params[:je][:date] is: "      +     params[:je][:date].to_s
+
     @je = Je.new(params[:je])
 
     if (@je.save)                            

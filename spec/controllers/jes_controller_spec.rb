@@ -14,7 +14,7 @@ describe JesController do
       @a4 = Account.create!(:name => "test4", :atype => "expense"  )          
     
       @je1 = Je.create!(:credit => @a1.id, :debit => @a2.id,
-                        :amount =>  300, :comment => "I like turtles!" )
+                        :amount =>  300, :date => "09/06/2011",  :comment => "I like turtles!" )
     end    
     
       
@@ -89,7 +89,8 @@ describe JesController do
         @attr = { 
           :credit => @a1.id,
           :debit => @a2.id,
-          :amount =>  300,         
+          :amount =>  300,
+          :date => "09/06/2011",                   
           :comment => "I like turtles!"
         }
       end
@@ -99,7 +100,6 @@ describe JesController do
           post :create, :je => @attr
         end.should change(Je, :count).by(1)
       end
-
 
 #      it "should have the correct amount in the new entry"
                

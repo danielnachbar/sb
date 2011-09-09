@@ -1,5 +1,11 @@
 <h1>Create a Journal Entry</h1>
 
+<script>
+$(function() {
+	$( "#datepicker" ).datepicker();
+});
+</script>
+
 <%= form_for(@je) do |f| %>
                 
 
@@ -44,14 +50,9 @@
 <tr><td>   
 
   <%= f.label "Date:" %><br />
-  <%#= f.text_field :date, :id => "datepicker" %>
-  <%= f.text_field :date %>
+  <%= f.text_field :date, :id => "datepicker" %>
 
-	<script>
-	$(function() {
-		$( "#datepicker" ).datepicker();
-	});
-	</script>
+
 	 
 </td></tr> 
 <tr><td>

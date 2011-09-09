@@ -1,3 +1,21 @@
+
+# == Schema Information
+#
+# Table name: jes
+#
+#  id         :integer         not null, primary key
+#  debit      :integer
+#  credit     :integer
+#  amount     :integer
+#  comment    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  date       :date
+#
+
+
+
+
 require 'spec_helper'
 
 describe Je do
@@ -11,7 +29,8 @@ describe Je do
       @attr = { 
         :credit => @a1.id,
         :debit => @a2.id,
-        :amount =>  300,         
+        :amount =>  300,
+        :date => "09/06/2011",         
         :comment => "I like turtles!"
       }    
   
@@ -22,6 +41,42 @@ describe Je do
       j = Je.create!(@attr)
       j.should be_valid    
     end         
+
+
+    it "should save the credit account correctly" do
+      j2 = Je.create!(@attr)
+      j2.should be_valid 
+      j2.credit.should == @attr[:credit]
+    end
+
+
+    it "should save the debit account correctly" do
+      j2 = Je.create!(@attr)
+      j2.should be_valid 
+      j2.debit.should == @attr[:debit]
+    end
+
+
+    it "should save the amount correctly" do
+      j2 = Je.create!(@attr)
+      j2.should be_valid 
+      j2.amount.should == @attr[:amount]
+    end
+
+
+    it "should save the date correctly" do
+      j2 = Je.create!(@attr)
+      j2.should be_valid
+      d2 = Date.parse(@attr[:date])
+      j2.date.should ==  d2
+    end
+
+    it "should save the comment correctly" do
+      j2 = Je.create!(@attr)
+      j2.should be_valid 
+      j2.comment.should eql @attr[:comment]
+    end         
+
 
     it "should require the credit account be present" do
       j2 = Je.create(@attr.merge(:credit => nil))
@@ -57,6 +112,12 @@ describe Je do
       j2 = Je.create(@attr.merge(:debit => 9999))
       j2.should_not be_valid
     end        
+
+     
+    it "should require a that credit and debit accounts are different" do
+      j2 = Je.create(@attr.merge(:debit => @a1.id))
+      j2.should_not be_valid
+    end
  
 
     it "should require the amount to be present" do
@@ -69,65 +130,18 @@ describe Je do
       j2.should_not be_valid
     end    
 
+    it "should require the date to be present" do
+      j2 = Je.create(@attr.merge(:date => nil))
+      j2.should_not be_valid
+    end
+
+
     it "should require that comments are less than 256 chars" do
       j2 = Je.create(@attr.merge(:comment => "x"*256))
       j2.should_not be_valid
-    end
+    end 
+
     
-  # 
-  #   it "should reject names that are too long" do
-  #     long_name = "a" * 51
-  #     long_name_account = Account.new(@attr.merge(:name => long_name))
-  #     long_name_account.should_not be_valid
-  #   end   
-  # 
-  # 
-  # it "should require a atype" do
-  #   no_atype_account = Account.new(@attr.merge(:atype => ""))
-  #   no_atype_account.should_not be_valid
-  # end
-  # 
-  # it "should reject atypes that are too long" do
-  #   long_atype = "a" * 51
-  #   long_atype_account = Account.new(@attr.merge(:atype => long_atype))
-  #   long_atype_account.should_not be_valid
-  # end
-  # 
-  #   # it "should now allow accessing the id" do
-  #   #   a = Account.create!(@attr)
-  #   #   a.id = 123
-  #   #   a.save
-  #   #   a.id should_not be_equal 123
-  #   # end
-  # 
-  #   it "should reject duplicate names" do
-  #     Account.create!(@attr)
-  #     user_with_duplicate_name = Account.new(@attr)
-  #     user_with_duplicate_name.should_not be_valid
-  #   end
-  # 
-  #   it "should reject names identical up to case" do
-  #     upcased_name = @attr[:name].upcase
-  #     Account.create!(@attr.merge(:name => upcased_name))
-  #     user_with_duplicate_name = Account.new(@attr)
-  #     user_with_duplicate_name.should_not be_valid
-  #   end           
-
-
+    
 end
-
-
-# == Schema Information
-#
-# Table name: jes
-#
-#  id         :integer         not null, primary key
-#  debit      :integer
-#  credit     :integer
-#  amount     :integer
-#  comment    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  date       :date
-#
 

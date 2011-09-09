@@ -27,6 +27,10 @@ class JeValidator < ActiveModel::Validator
     if Account.find_by_id(je.debit).nil?       
       je.errors[:debit] << "Account #{je.debit} invalid"      
     end    
+
+    if je.debit == je.credit       
+      je.errors[:debit] << "Credit and Debit accounts must be different"      
+    end              
     
   end
 end
@@ -45,7 +49,8 @@ class Je < ActiveRecord::Base
   validates_numericality_of :debit, :greater_than_or_equal_to => 1
   validates :amount, :presence => true
   validates_numericality_of :amount, :greater_than_or_equal_to => 0     
-  validates :comment, :length => {:maximum => 255}
+  validates :comment, :length => {:maximum => 255}              
+  validates :date, :presence => true
 
 end
 
