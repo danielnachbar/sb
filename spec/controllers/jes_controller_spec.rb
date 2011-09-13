@@ -37,7 +37,7 @@ describe JesController do
     
       @jes.each do |je|
         response.should have_selector('a', :href => je_path(je),
-                                           :content => je.id.to_s)
+                                           :content => "Details")
       end
     
     end          
@@ -153,5 +153,80 @@ describe JesController do
       end                      
     end               # success                  
   end      # POST create  
+
+  describe "GET 'edit'" do            
+    
+    before(:each) do
+      @a1 = Account.create!(:name => "test1", :atype => "asset"    )
+      @a2 = Account.create!(:name => "test2", :atype => "liability") 
+
+      @attr = { 
+        :credit => @a1.id,
+        :debit => @a2.id,
+        :amount =>  300,
+        :date => "09/06/2011",                   
+        :comment => "I like turtles!"
+      }    
+      @je1 = Je.create!(@attr )    
+    end
+    
+    it "should be successful" do
+      get :edit, :id => @je1
+      response.should be_success
+    end         
+    
+    it "should have the right title" do        
+      get :edit, :id => @je1
+      response.should have_selector('title', :content => "Edit Journal Entry")
+    end        
+  end # GET edit        
+  
+  
+    describe "PUT 'update'" do 
+
+      before(:each) do
+        @a1 = Account.create!(:name => "test1", :atype => "asset"    )
+        @a2 = Account.create!(:name => "test2", :atype => "liability")
+        @a3 = Account.create!(:name => "test3", :atype => "income"   )
+        @a4 = Account.create!(:name => "test4", :atype => "expense"  )          
+
+        @attr = { 
+          :credit => @a1.id,
+          :debit => @a2.id,
+          :amount =>  300,
+          :date => "09/06/2011",                   
+          :comment => "I like turtles!"
+        }
+           
+        @je1 = Je.create!(:credit => @a1.id, :debit => @a2.id,
+                          :amount =>  300, :date => "09/06/2011",  :comment => "I like turtles!" )           
+      end
+
+      describe "failure" do
+
+        before(:each) do
+          @attr2 = { :credit => 0, :debit => 0, :amount => -1, :date => "09/02/2011"}
+        end
+        
+        it "should render the 'edit' page" do
+          put :update, :id => @je1, :je => @attr2
+          response.should render_template(:edit)
+        end            
+
+        it "should have the right title" do
+          put :update, :id => @je1, :je => @attr2
+          response.should have_selector('title', :content => "Edit Journal Entry")
+        end                           
+
+      end      # create failure  
+
+
+      describe "success" do  
+        it "should have a flash message" do
+          put :update, :id => @je1, :je => @attr2
+          flash[:success].should =~ /Updated/i
+        end                      
+      end               # success                  
+    end      # PUT update  
 
 end   # describe JesController

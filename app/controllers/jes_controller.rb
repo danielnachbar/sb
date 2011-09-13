@@ -8,6 +8,11 @@ class JesController < ApplicationController
     @jelist =  Je.all
   end
 
+  def updatelist     
+    @title = "Journal Entries"
+    @jelist =  Je.all
+  end
+
   def show            
     @je = Je.find(params[:id])
     @title = "New Journal Entry"          
@@ -36,6 +41,22 @@ class JesController < ApplicationController
     end      
   end
 
+  def edit  
+    @je = Je.find(params[:id])
+    @title = "Edit Journal Entry"    
+  end             
+  
+  def update
+    
+    @je = Je.find(params[:id])      
+    if @je.update_attributes(params[:je])  
+
+      redirect_to @je, :flash => { :success => "Journal Entry Updated!" }
+    else
+      @title = "Edit Journal Entry"
+      render :edit
+    end                   
+  end
 
 end
 

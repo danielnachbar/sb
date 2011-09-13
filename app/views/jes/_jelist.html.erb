@@ -7,10 +7,10 @@
 	        <%= link_to "Delete " + j.id.to_s, a, :method => :delete, :confirm => "You sure?",
 	                              :title => "Delete #{j.id}" %>  
 		  <% when "update" %>
-			<%= link_to "Edit " + j.id.to_s, edit_account_path(j) %>	
+			<%= link_to "Edit ", edit_je_path(j) %>	
 	     
 		  <% else %>    
-	        <%= link_to j.id, j %>		 
+	        <%= link_to "Details" , j%>		 
 		<% end %>
 	  </li>	
   </ul>

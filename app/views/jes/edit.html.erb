@@ -1,0 +1,84 @@
+                    <h1>Create a Journal Entry</h1>
+
+<script>
+$(function() {
+	$( "#datepicker" ).datepicker();
+});
+</script>
+
+<%= form_for(@je) do |f| %>
+                
+
+<%= link_to  "All Journal Entries" , jes_path %>
+
+
+<%= render 'shared/error_messages', :object => f.object %>    
+
+
+
+<table border=1>    
+<tr>
+ <td colspan=2>   
+<div class="field">
+  <%= f.label "Amount" %><br />
+  <%= f.text_field :amount %>
+</div>
+</td>
+</tr>                
+	<tr>
+<td>
+<%= f.label "Debit" %><br />
+   <% names = Account.select(:name).collect { |n| n.name } %>
+   <% accts = [] %>
+   <%# names.sort.each { |n| a = Account.find_by_name(n) 
+				       accts.push([ a.name.titleize, a.id ])  }   %>      
+<div class="field">
+  <%= f.select :debit,  names.sort.collect { |n| a = Account.find_by_name(n) 
+				                              [  a.name.titleize + " " + "."*(20-a.name.length) + " (#{a.atype.titleize})", a.id ]  }
+
+
+
+  %>
+</td> 
+		<td>
+<%= f.label "Credit" %><br />
+   <% names = Account.select(:name).collect { |n| n.name } %>
+   <% accts = [] %>
+   <%# names.sort.each { |n| a = Account.find_by_name(n) 
+				       accts.push([ a.name.titleize, a.id ])  }   %>      
+<div class="field">
+  <%= f.select :credit,  names.sort.collect { |n| a = Account.find_by_name(n) 
+				                              [  a.name.titleize + " " + "."*(20-a.name.length) + " (#{a.atype.titleize})", a.id ]  }
+
+
+
+  %> 
+</td>
+
+
+</tr> 
+<tr><td>   
+
+  <%= f.label "Date:" %><br />
+  <%= f.text_field :date, :id => "datepicker" %>
+
+
+</td></tr> 
+<tr><td> 
+	
+	<div class="field">
+	  <%= f.label "Comment" %><br />
+	  <%= f.text_field :comment %>
+	</div>	
+	   
+</td></tr> 
+<tr><td>
+  <div class="actions">
+    <%= f.submit "Create It!" %>
+  </div>  
+</tr></td>   
+</table>
+</div>
+
+ 
+<% end %>

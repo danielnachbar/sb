@@ -37,7 +37,6 @@ describe PagesController do
       response.should have_selector('a', :href => '/accounts/deletelist',
                                          :content => "Delete Account")                                               
     end   
-     
     
     
   end
