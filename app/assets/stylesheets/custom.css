@@ -1,9 +1,8 @@
-.container {
-  width: 710px;
-}
+@charset 'UTF-8';
 
 body {
-  background: 	#1E90FF;
+  font-family: Verdana,Helvetica,Arial,sans-serif;
+  background: #DDDDDD;
 }
 
 header {
@@ -74,7 +73,16 @@ nav ul li a:visited {
 nav ul li a:hover {
   text-decoration: underline;
 }
+            
+.container {
+	margin: auto;
+	width: 95%; 
+	-moz-border-radius: 20px; border-radius: 20px;
+}   
 
+.front_page_table {
+	width:100%;
+}
 /* Sign up button */
 
 a.signup_button {
@@ -103,7 +111,6 @@ a.signup_button {
 footer {
   text-align: center;
   margin-top: 10px;
-  width: 710px;
   margin-left: auto;
   margin-right: auto;
 }
