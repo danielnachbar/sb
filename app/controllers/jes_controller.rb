@@ -13,6 +13,11 @@ class JesController < ApplicationController
     @jelist =  Je.all
   end
 
+  def deletelist     
+    @title = "Choose a Journal Entry to Delete"
+    @jelist =  Je.all
+  end
+
   def show            
     @je = Je.find(params[:id])
     @title = "New Journal Entry"          
@@ -61,7 +66,13 @@ class JesController < ApplicationController
       render :edit
     end                   
   end
-
+ 
+  def destroy
+    @je = Je.find(params[:id]) 
+    @je.destroy   
+    redirect_to deletelist_jes_path, :flash => { :success => "Journal Entry # #{params[:id]} Destroyed." }    
+  end
+  
 end
 
 def get_account_name_by_id(aid)    

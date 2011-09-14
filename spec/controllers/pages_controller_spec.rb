@@ -31,12 +31,44 @@ describe PagesController do
       response.should have_selector('a', :href => new_account_path,
                                          :content => "Create Account")                                               
     end    
+
+    
+    it "should have a link to the Edit Account" do
+      get 'home'
+      response.should have_selector('a', :href => '/accounts/updatelist',
+                                         :content => "Edit Account")                                               
+    end
     
     it "should have a link to the Delete Account" do
       get 'home'
       response.should have_selector('a', :href => '/accounts/deletelist',
                                          :content => "Delete Account")                                               
     end   
+
+    it "should have a link to the JE List Page" do
+      get 'home'
+      response.should have_selector('a', :href => jes_path,
+                                         :content => "All Journal Entries")                                               
+    end        
+    
+    it "should have a link to the Create Journal Entry" do
+      get 'home'
+      response.should have_selector('a', :href => new_je_path,
+                                         :content => "Create Journal Entry")                                               
+    end    
+               
+    
+      it "should have a link to the Edit Account" do
+        get 'home'
+        response.should have_selector('a', :href => '/jes/updatelist',
+                                           :content => "Edit Journal Entry")                                               
+      end                                                
+                    
+    it "should have a link to the Delete Account" do
+      get 'home'
+      response.should have_selector('a', :href => '/jes/deletelist',
+                                         :content => "Delete Journal Entry")                                               
+    end                 
     
     
   end

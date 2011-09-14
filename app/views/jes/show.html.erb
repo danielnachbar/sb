@@ -12,7 +12,7 @@
 <% credit = Account.find(@je.credit)%>   
 <% debit  = Account.find(@je.debit )%>   
 
-<h3>Id: <%= credit.id.to_s %></h3>       
+<h3>Id: <%= @je.id.to_s %></h3>       
 
 <h3>Debit  Account: <%= get_account_name_by_id(@je.debit).titleize %></h3>       
 
@@ -23,4 +23,7 @@
                                                           
 <h3> Date: <%= @je.date.to_s %></h3>
                       
-<h3>Comment: <%= @je.comment %></h3>       
+<h3>Comment: <%= @je.comment %></h3>          
+
+
+<p> <%= link_to "Edit", edit_je_path(@je) %></p>           

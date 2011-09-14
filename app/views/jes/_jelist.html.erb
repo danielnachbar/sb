@@ -4,7 +4,7 @@
 		<%= get_account_name_by_id(j.debit) + " "+  get_account_name_by_id(j.credit) + " "+ Money.new(j.amount).format(:symbol => false) + " "+ j.date.to_s + " "+ j.comment.to_s %>
 		<% case @list_type %>   
 		  <% when "delete" %>
-	        <%= link_to "Delete " + j.id.to_s, a, :method => :delete, :confirm => "You sure?",
+	        <%= link_to "Delete " + j.id.to_s, j, :method => :delete, :confirm => "You sure?",
 	                              :title => "Delete #{j.id}" %>  
 		  <% when "update" %>
 			<%= link_to "Edit ", edit_je_path(j) %>	

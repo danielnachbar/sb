@@ -228,5 +228,73 @@ describe JesController do
         end                      
       end               # success                  
     end      # PUT update  
+ 
+
+    describe "GET 'deletelist'" do           
+
+      before(:each) do
+        @a1 = Account.create!(:name => "test1", :atype => "asset"    )
+        @a2 = Account.create!(:name => "test2", :atype => "liability")
+
+        @attr = { 
+          :credit => @a1.id,
+          :debit => @a2.id,
+          :amount =>  300,
+          :date => "09/06/2011",                   
+          :comment => "I like turtles!"
+        }
+           
+        @je1 = Je.create!(:credit => @a1.id, :debit => @a2.id,
+                          :amount =>  300, :date => "09/06/2011",  :comment => "I like turtles!" )           
+      end
+
+
+      it "should have the right title" do
+        get :deletelist
+        response.should have_selector('title', :content => "Choose a Journal Entry to Delete")
+      end
+
+      it "should have a link to delete a JE" do      
+        get :deletelist
+        response.should have_selector('a', :href => je_path(@je1.id),
+                                           :content => "Delete", "data-method" => "delete")
+      end
+
+
+    end
+ 
+    describe "GET 'delete'" do           
+
+      before(:each) do
+        @a1 = Account.create!(:name => "test1", :atype => "asset"    )
+        @a2 = Account.create!(:name => "test2", :atype => "liability")
+
+        @attr = { 
+          :credit => @a1.id,
+          :debit => @a2.id,
+          :amount =>  300,
+          :date => "09/06/2011",                   
+          :comment => "I like turtles!"
+        }
+           
+        @je1 = Je.create!(:credit => @a1.id, :debit => @a2.id,
+                          :amount =>  300, :date => "09/06/2011",  :comment => "I like turtles!" )           
+      end
+
+
+      it "should have a flash message" do
+        delete :destroy, :id => @je1 
+        flash[:success].should =~ /Destroyed/i
+      end        
+     
+      it "should destroy the journal entry" do
+        lambda do
+          delete :destroy, :id => @je1
+        end.should change(Je, :count).by(-1)
+      end           
+
+
+    end
+
 
 end   # describe JesController
