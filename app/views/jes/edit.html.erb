@@ -21,7 +21,7 @@ $(function() {
  <td colspan=2>   
 <div class="field">
   <%= f.label "Amount" %><br />
-  <%= f.text_field :amount %>
+  <%= f.text_field :amount , :value => Money.new(@je.amount).format(:symbol => false)   %>
 </div>
 </td>
 </tr>                
@@ -60,7 +60,7 @@ $(function() {
 <tr><td>   
 
   <%= f.label "Date:" %><br />
-  <%= f.text_field :date, :id => "datepicker" %>
+  <%= f.text_field :date, :value => date_text(@je.date), :id => "datepicker" %>
 
 
 </td></tr> 
@@ -74,7 +74,7 @@ $(function() {
 </td></tr> 
 <tr><td>
   <div class="actions">
-    <%= f.submit "Create It!" %>
+    <%= f.submit "Update" %>
   </div>  
 </tr></td>   
 </table>

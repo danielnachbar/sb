@@ -223,7 +223,7 @@ describe JesController do
 
       describe "success" do  
         it "should have a flash message" do
-          put :update, :id => @je1, :je => @attr2
+          put :update, :id => @je1, :je => { :credit => @a2.id, :debit => @a1.id, :amount => 1, :date => "09/02/2011"} 
           flash[:success].should =~ /Updated/i
         end                      
       end               # success                  

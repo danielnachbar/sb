@@ -47,11 +47,15 @@ class JesController < ApplicationController
   end             
   
   def update
+
+    params[:je][:amount] =   params[:je][:amount].to_money.cents.to_s # run input thorough the Money parser 
+    datestring = params[:je][:date]
+    params[:je][:date]   =   Date.new(datestring[6,4].to_i,datestring[0,2].to_i,datestring[3,2].to_i)
     
     @je = Je.find(params[:id])      
     if @je.update_attributes(params[:je])  
 
-      redirect_to @je, :flash => { :success => "Journal Entry Updated!" }
+      redirect_to je_path(@je.id), :flash => { :success => "Journal Entry Updated!" }
     else
       @title = "Edit Journal Entry"
       render :edit
@@ -62,4 +66,9 @@ end
 
 def get_account_name_by_id(aid)    
   Account.find(aid).name
+end
+                    
+def date_text(date)        
+  str = date.to_s
+  str[5,2] + "/" + str[8,2]   + "/" + str[0,4]    # swap fields around to work with datepicker
 end
