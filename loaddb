@@ -1,0 +1,98 @@
+
+Account.create!(:name=>"checking",:atype=>"asset")
+Account.create!(:name=>"savings",:atype=>"asset")  
+
+
+Account.create!(:name=>"equity",:atype=>"liability")
+Account.create!(:name=>"loan",:atype=>"liability")  
+    
+Account.create!(:name=>"sales",:atype=>"income")
+Account.create!(:name=>"interest income",:atype=>"income")  
+
+Account.create!(:name=>"rent",:atype=>"expense")
+Account.create!(:name=>"interest expense",:atype=>"expense")  
+Account.create!(:name=>"telephone",:atype=>"expense")
+
+Je.create!(:debit   => Account.find_by_name("rent").id,
+           :credit  => Account.find_by_name("checking").id,
+           :amount  => 30000 ,
+           :date    => Date.new(2011, 8, 1),
+           :comment => "annex rent"        
+                      )
+  
+Je.create!(:debit   => Account.find_by_name("rent").id,
+           :credit  => Account.find_by_name("checking").id,
+           :amount  => 40000 ,
+           :date    => Date.new(2011, 8, 15),
+           :comment => "office rent"        
+                      )               
+
+Je.create!(:debit   => Account.find_by_name("checking").id,
+           :credit  => Account.find_by_name("sales").id,
+           :amount  => 50000 ,
+           :date    => Date.new(2011, 8, 10),
+           :comment => "sold one"        
+                      )
+
+Je.create!(:debit   => Account.find_by_name("checking").id,
+           :credit  => Account.find_by_name("equity").id,
+           :amount  => 100000 ,
+           :date    => Date.new(2011, 1, 1),
+           :comment => "initial investment"        
+                      )  
+
+Je.create!(:debit   => Account.find_by_name("checking").id,
+           :credit  => Account.find_by_name("loan").id,
+           :amount  => 50000 ,
+           :date    => Date.new(2011, 8, 1),
+           :comment => "credit line draw"        
+                      )
+
+Je.create!(:debit   => Account.find_by_name("checking").id,
+           :credit  => Account.find_by_name("sales").id,
+           :amount  => 10000 ,
+           :date    => Date.new(2011, 9, 15),
+           :comment => "sold another one"        
+                      )               
+
+Je.create!(:debit   => Account.find_by_name("savings").id,
+           :credit  => Account.find_by_name("checking").id,
+           :amount  => 50000 ,
+           :date    => Date.new(2011, 8, 1),
+           :comment => "stash some cash"        
+                      )
+
+Je.create!(:debit   => Account.find_by_name("checking").id,
+           :credit  => Account.find_by_name("interest income").id,
+           :amount  => 10 ,
+           :date    => Date.new(2011, 10, 1),
+           :comment => "interest from savings account"        
+                      )
+
+Je.create!(:debit   => Account.find_by_name("checking").id,
+           :credit  => Account.find_by_name("sales").id,
+           :amount  => 30000 ,
+           :date    => Date.new(2011, 9, 1),
+           :comment => "sold more"        
+                      )
+
+Je.create!(:debit   => Account.find_by_name("telephone").id,
+           :credit  => Account.find_by_name("checking").id,
+           :amount  => 5000 ,
+           :date    => Date.new(2011, 9, 15),
+           :comment => "phone bill"        
+                      )               
+
+Je.create!(:debit   => Account.find_by_name("checking").id,
+           :credit  => Account.find_by_name("sales").id,
+           :amount  => 500000 ,
+           :date    => Date.new(2011, 10, 1),
+           :comment => "sold a bunch"        
+                      )
+
+Je.create!(:debit   => Account.find_by_name("rent").id,
+           :credit  => Account.find_by_name("checking").id,
+           :amount  => 30000 ,
+           :date    => Date.new(2011, 10, 1),
+           :comment => "office rent"        
+                                            )            

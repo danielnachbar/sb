@@ -1,6 +1,10 @@
 <script type="text/javascript" charset="utf-8"> 
 	$(document).ready(function() {
-		$('#jelist_table').dataTable();
+		$('#jelist_table').dataTable({
+	        "bJQueryUI": true,
+	        "sPaginationType": "full_numbers"			
+			
+		});
 		// alert("hello")
 	} );
 </script>
@@ -34,7 +38,7 @@
 		 <%= get_account_name_by_id(j.credit).titleize %> 
 		</td>
 		
-		<td> 		
+		<td class="money"> 		
 		 <%= Money.new(j.amount).format(:symbol => false) %> 
 		</td>
 				
