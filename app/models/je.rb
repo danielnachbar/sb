@@ -52,6 +52,13 @@ class Je < ActiveRecord::Base
   validates :comment, :length => {:maximum => 255}              
   validates :date, :presence => true
 
+  def self.get_jes(id)
+    debits =  Je.where(:debit => id)
+    credits = Je.where(:credit => id)
+    (debits + credits).sort {|a,b| a.date <=> b.date }
+  end         
+
+
 end
 
 

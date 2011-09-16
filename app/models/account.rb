@@ -19,6 +19,12 @@ class Account < ActiveRecord::Base
 
   validates :atype, :presence   => true,
                     :length   => { :maximum => 50 }
-  
+
+
+def get_balance(date)    
+  0
+end   
+
+
 end
 

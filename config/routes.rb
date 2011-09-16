@@ -1,5 +1,7 @@
 Sb::Application.routes.draw do
         
+  get "reports/balancesheet"
+
   resources :jes  do
     get 'deletelist', :on => :collection       
     get 'updatelist', :on => :collection           

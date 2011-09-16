@@ -24,7 +24,9 @@ describe Je do
       @a1 = Account.create!(:name => "test1", :atype => "asset"    )
       @a2 = Account.create!(:name => "test2", :atype => "liability")
       @a3 = Account.create!(:name => "test3", :atype => "income"   )
-      @a4 = Account.create!(:name => "test4", :atype => "expense"  )          
+      @a4 = Account.create!(:name => "test4", :atype => "expense"  )
+                
+      @a5 = Account.create!(:name => "test5", :atype => "expense"  )           # never has a Je
       
       @attr = { 
         :credit => @a1.id,
@@ -141,7 +143,41 @@ describe Je do
       j2.should_not be_valid
     end 
 
-    
+   describe "get_jes method" do 
+     
+     before (:each) do
+
+       @je1 = Je.create!(:debit => @a1.id, :credit => @a2.id,
+                         :amount =>  200, :date => "09/08/2011",  :comment => "Why so serious?" )
+                         
+       @je2 = Je.create!(:debit => @a3.id, :credit => @a4.id,
+                         :amount =>  200, :date => "09/07/2011",  :comment => "Can't see me!" )
+              
+       @je3 = Je.create!(:debit => @a1.id, :credit => @a2.id,
+                         :amount =>  300, :date => "09/06/2011",  :comment => "I like turtles!" )  
+     end
+                     
+     it "should return the right number of journal entries for multiple debit jes" do
+          Je.get_jes(@a1.id).length.should == 2
+     end
+
+     it "should return the right number of journal entries for multiple credit jes" do
+          Je.get_jes(@a2.id).length.should == 2
+     end
+
+     it "should return the right number of journal entries for a single debit je" do
+          Je.get_jes(@a3.id).length.should == 1
+     end
+     
+     it "should return the right number of journal entries for a single credit je" do
+          Je.get_jes(@a4.id).length.should == 1
+     end     
+     
+     it "should return the right number of journal entries for an account with no jes" do
+          Je.get_jes(@a5.id).length.should == 0
+     end             
+     
+   end
     
 end
 
