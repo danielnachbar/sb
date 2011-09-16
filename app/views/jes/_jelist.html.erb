@@ -1,7 +1,48 @@
+<script type="text/javascript" charset="utf-8"> 
+	$(document).ready(function() {
+		$('#jelist_table').dataTable();
+		// alert("hello")
+	} );
+</script>
+
+
+<table  class="display"  id="jelist_table"> 
+	<thead>
+		<tr> 
+			<th>Date</th> 
+			<th>Debit Account</th> 
+			<th>Credit Account</th> 
+			<th>Amount</th> 
+			<th>Comment</th>  
+			<th>Action</th> 
+			
+		</tr>		
+	</thead> 
+
 <% @jelist.each do |j|%>
-  <ul class="je">        
-	  <li>       
-		<%= get_account_name_by_id(j.debit) + " "+  get_account_name_by_id(j.credit) + " "+ Money.new(j.amount).format(:symbol => false) + " "+ j.date.to_s + " "+ j.comment.to_s %>
+      
+	<tr>
+		<td>      
+  	 	<%= j.date.to_s %>
+		</td> 
+		 
+		<td> 
+		<%= get_account_name_by_id(j.debit).titleize %> 
+		</td>
+				
+		<td> 		
+		 <%= get_account_name_by_id(j.credit).titleize %> 
+		</td>
+		
+		<td> 		
+		 <%= Money.new(j.amount).format(:symbol => false) %> 
+		</td>
+				
+		<td> 		
+		 <%= j.comment.to_s %>      
+		</td>		
+		
+		<td>
 		<% case @list_type %>   
 		  <% when "delete" %>
 	        <%= link_to "Delete " + j.id.to_s, j, :method => :delete, :confirm => "You sure?",
@@ -11,8 +52,9 @@
 	     
 		  <% else %>    
 	        <%= link_to "Details" , j%>		 
-		<% end %>
-	  </li>	
-  </ul>
-                   
-<% end %>
+		<% end %>   
+		</td>
+	</tr>	              
+<% end %>            
+
+</table>
