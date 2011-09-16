@@ -1,5 +1,7 @@
 Sb::Application.routes.draw do
         
+  get "books/new"
+
   get "reports/balancesheet"
 
   resources :jes  do

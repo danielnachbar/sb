@@ -73,7 +73,7 @@ describe Account do
      user_with_duplicate_name.should_not be_valid
    end 
    
-   describe "methods" do
+   describe "get_balance method" do
 
      before(:each) do
        @a1 = Account.create!(:name => "test1", :atype => "asset"    )
@@ -82,9 +82,9 @@ describe Account do
        @a4 = Account.create!(:name => "test4", :atype => "expense"  )          
 
        @je1 = Je.create!(:debit => @a1.id, :credit => @a2.id,
-                         :amount =>  300, :date => "09/06/2011",  :comment => "I like turtles!" ) 
+                         :amount =>  300, :date => "06/09/2011",  :comment => "I like turtles!" ) 
        @je2 = Je.create!(:debit => @a1.id, :credit => @a2.id,
-                         :amount =>  200, :date => "09/08/2011",  :comment => "Why so serious?" )  
+                         :amount =>  200, :date => "08/09/2011",  :comment => "Why so serious?" )  
                                                
      end
 
@@ -92,21 +92,21 @@ describe Account do
        @a1.get_balance(Date.new(2011,9,5)).should == 0    
      end
      
-     # it "should give the right balance on the day of a journal entry" do
-     #   @a1.get_balance(Date.new(2011,9,6)).should == 300    
-     # end     
-     # 
-     # it "should give the right balance on the day after a journal entry" do
-     #   @a1.get_balance(Date.new(2011,9,7)).should == 300    
-     # end
-     # 
-     # it "should give the right balance on the day after a journal entry" do
-     #   @a1.get_balance(Date.new(2011,9,8)).should == 500    
-     # end     
-     # 
-     # it "should give the right balance on the day after a journal entry" do
-     #   @a1.get_balance(Date.new(2011,9,9)).should == 500    
-     # end    
+     it "should give the right balance on the day of a journal entry" do
+       @a1.get_balance(Date.new(2011,9,6)).should == 300    
+     end     
+     
+     it "should give the right balance on the day after a journal entry" do
+       @a1.get_balance(Date.new(2011,9,7)).should == 300    
+     end
+     
+     it "should give the right balance on the day after a journal entry" do
+       @a1.get_balance(Date.new(2011,9,8)).should == 500    
+     end     
+     
+     it "should give the right balance on the day after a journal entry" do
+       @a1.get_balance(Date.new(2011,9,9)).should == 500    
+     end                      
            
    end
 
