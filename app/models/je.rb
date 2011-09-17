@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: jes
-#
-#  id         :integer         not null, primary key
-#  debit      :integer
-#  credit     :integer
-#  amount     :integer
-#  comment    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  date       :date
-#   
-
 
 class JeValidator < ActiveModel::Validator
   # implement the method where the validation logic must reside
@@ -62,4 +48,19 @@ class Je < ActiveRecord::Base
 end
 
 
+
+
+# == Schema Information
+#
+# Table name: jes
+#
+#  id         :integer         not null, primary key
+#  debit      :integer
+#  credit     :integer
+#  amount     :integer
+#  comment    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  date       :date
+#
 

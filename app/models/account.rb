@@ -42,6 +42,8 @@ def get_balance(date)
     return total
 end   
 
+def state(date)
+end
 
 end
 
