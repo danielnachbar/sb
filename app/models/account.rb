@@ -21,29 +21,67 @@ class Account < ActiveRecord::Base
                     :length   => { :maximum => 50 }
 
 
-def get_balance(date)    
-  jes = Je.get_jes(self.id)
-  total = 0
-  jes.each { |j| 
-# STDERR.puts "loop date is " + date.to_s + " j.date is " + j.date.to_s
-       if date >= j.date          
-         if j.debit == self.id  
-# STDERR.puts "inside if"             
-           total += j.amount
-         else               
-           if j.credit == self.id 
-             total -= j.amount
-           else    
-             raise RangeError
-           end
-         end
-       end
-    }
-    return total
-end   
+  def balance(date)    
+    balance_from_jes(Je.get_jes(self.id),date)
+  end
 
-def state(date)
-end
+  def state(date)
+    c = child_hash         
+    {:name => self.name ,
+     :children => c,
+     :balance => balance_from_jes(c,date) 
+      }
+  end   
+
+  def child_hash     
+    r = {}
+    Je.get_jes(self.id).each { |j|
+       r[j.id] = j 
+    }             
+    return r
+  end       
+
+  private
+  def balance_from_jes(jes,indate)
+    total = 0
+    case jes.class.to_s       
+    when "Hash"
+        jes.each { |id,j| 
+      # STDERR.puts "loop date is " + date.to_s + " j.date is " + j.date.to_s
+             if indate >= j.date          
+               if j.debit == self.id  
+      # STDERR.puts "inside if"             
+                 total += j.amount
+               else               
+                 if j.credit == self.id 
+                   total -= j.amount
+                 else    
+                   raise RangeError
+                 end
+               end
+             end
+          }
+          return total    
+    when "Array"
+        jes.each { |j| 
+      # STDERR.puts "loop date is " + date.to_s + " j.date is " + j.date.to_s
+             if indate >= j.date          
+               if j.debit == self.id  
+      # STDERR.puts "inside if"             
+                 total += j.amount
+               else               
+                 if j.credit == self.id 
+                   total -= j.amount
+                 else    
+                   raise RangeError
+                 end
+               end
+             end
+          }
+          return total    
+    end
+
+  end         
 
 end
 

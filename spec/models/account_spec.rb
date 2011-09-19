@@ -73,7 +73,7 @@ describe Account do
      user_with_duplicate_name.should_not be_valid
    end 
    
-   describe "get_balance method" do
+   describe "instance methods" do
 
      before(:each) do
        @a1 = Account.create!(:name => "test1", :atype => "asset"    )
@@ -87,27 +87,68 @@ describe Account do
                          :amount =>  200, :date => "08/09/2011",  :comment => "Why so serious?" )  
                                                
      end
-
-     it "should give the right balance before any journal entries" do
-       @a1.get_balance(Date.new(2011,9,5)).should == 0    
-     end
      
-     it "should give the right balance on the day of a journal entry" do
-       @a1.get_balance(Date.new(2011,9,6)).should == 300    
-     end     
+     describe "the balance method" do
+       it "should give the right balance before any journal entries" do
+         @a1.balance(Date.new(2011,9,5)).should == 0    
+       end
      
-     it "should give the right balance on the day after a journal entry" do
-       @a1.get_balance(Date.new(2011,9,7)).should == 300    
-     end
+       it "should give the right balance on the day of a journal entry" do
+         @a1.balance(Date.new(2011,9,6)).should == 300    
+       end     
      
-     it "should give the right balance on the day after a journal entry" do
-       @a1.get_balance(Date.new(2011,9,8)).should == 500    
-     end     
+       it "should give the right balance on the day after a journal entry" do
+         @a1.balance(Date.new(2011,9,7)).should == 300    
+       end
      
-     it "should give the right balance on the day after a journal entry" do
-       @a1.get_balance(Date.new(2011,9,9)).should == 500    
-     end                      
+       it "should give the right balance on the day after a journal entry" do
+         @a1.balance(Date.new(2011,9,8)).should == 500    
+       end     
+     
+       it "should give the right balance on the day after a journal entry" do
+         @a1.balance(Date.new(2011,9,9)).should == 500    
+       end   
+     
+     end 
+     
+     describe "the state method"   do   
+       before (:each) do 
+         @s = @a1.state(Date.new(2011,9,7))
+       end
+       
+       it "should return a hash" do    
+         @s.class.to_s == "Hash"
+       end            
+       
+        it "the hash should have a key for name" do  
+           @s[:name].should_not be_nil 
+         end       
+                    
+       it "the name in the hash should match the account name" do 
+         @s[:name].should == @a1.name
+       end
+                 
+       it "the hash should have a key for children" do  
+          @s[:children].should_not be_nil 
+        end
+                
+       it "the value of the children should be an hash" do
+         @s[:children].class.to_s.should == "Hash"
+       end
+         
+       it "the hash should have a key for balance" do  
+          @s[:balance].should_not be_nil 
+        end
+          
+       it "the value of the balance should be correct" do
+         @s[:balance].should == 300
+       end     
+               
+     end                 
            
    end
+
+
+
 
 end
