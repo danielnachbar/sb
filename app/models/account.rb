@@ -33,6 +33,8 @@ class Account < ActiveRecord::Base
       }
   end   
 
+  private 
+
   def child_hash     
     r = {}
     Je.get_jes(self.id).each { |j|
@@ -41,46 +43,34 @@ class Account < ActiveRecord::Base
     return r
   end       
 
-  private
+ 
   def balance_from_jes(jes,indate)
     total = 0
     case jes.class.to_s       
     when "Hash"
-        jes.each { |id,j| 
-      # STDERR.puts "loop date is " + date.to_s + " j.date is " + j.date.to_s
-             if indate >= j.date          
-               if j.debit == self.id  
-      # STDERR.puts "inside if"             
-                 total += j.amount
-               else               
-                 if j.credit == self.id 
-                   total -= j.amount
-                 else    
-                   raise RangeError
-                 end
-               end
-             end
-          }
-          return total    
+        je_array = jes.values
     when "Array"
-        jes.each { |j| 
-      # STDERR.puts "loop date is " + date.to_s + " j.date is " + j.date.to_s
-             if indate >= j.date          
-               if j.debit == self.id  
-      # STDERR.puts "inside if"             
-                 total += j.amount
-               else               
-                 if j.credit == self.id 
-                   total -= j.amount
-                 else    
-                   raise RangeError
-                 end
-               end
+      je_array = jes
+    else
+      raise ArgumentError
+    end 
+    
+    je_array.each { |j| 
+  # STDERR.puts "loop date is " + date.to_s + " j.date is " + j.date.to_s
+         if indate >= j.date          
+           if j.debit == self.id  
+  # STDERR.puts "inside if"             
+             total += j.amount
+           else               
+             if j.credit == self.id 
+               total -= j.amount
+             else    
+               raise RangeError
              end
-          }
-          return total    
-    end
-
+           end
+         end
+      }
+      return total
   end         
 
 end

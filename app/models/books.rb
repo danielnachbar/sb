@@ -22,27 +22,41 @@ class Books < ActiveRecord::Base
 @@current_books.name = "top"
 
 
-  def self.state(date)
-    types = %w( income expense asset liability)
-    r = {}                 
-    # r[:name] = self.name
-    # 
-    # 
-    # c = {}
-    # types.each { |t|
-    #   c[t] = {}
-    #   c[t][:name] =  t 
-    #   c[t][:children] = {}
-    #   Account.where(:atype => t).each { |a|       
-    #       c[t][:children][a.name] = a.state(date)
-    #   }
-    #      
-    # }                   
-    # 
-    # r[:children]  = c
-    # r[:balance] = child_balance(c)             
-        
+  def state(date)    
+    c = accounts_by_type(date)         
+    {:name => @@current_books.name ,
+     :children => c,
+     :balance => balance_from_children(c) 
+      }          
+
+  end 
     
-    return r
+  private
+  
+  def accounts_by_type(date)             
+    retval = {};                                      
+    %w{income expense asset liability}.each do |t|
+      retval[t] = get_node_for_type(t,date)
+    end
+    retval
   end
+
+  def get_node_for_type(t,date)
+    c = {}
+    Account.where(:atype => t).each { |a|
+      c[a.name] = a.state(date)
+    }
+              
+    {:name => @@current_books.name ,
+     :children => c,
+     :balance => balance_from_children(c) 
+    }           
+  end
+  
+  def balance_from_children(c)
+    sum = 0
+    c.each { |k,v| sum +=  v[:balance]  }
+    return sum
+  end  
+  
 end
