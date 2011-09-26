@@ -12,7 +12,8 @@
                     
 
 class Books < ActiveRecord::Base     
-  
+
+  ATYPES = %w{income expense asset liability}
 
   def self.current  
      @@current_books
@@ -22,9 +23,10 @@ class Books < ActiveRecord::Base
 @@current_books.name = "top"
 
 
-  def state(date)    
+  def state(date = Date.new(Time.now.year, Time.now.month, Time.now.day))    
     c = accounts_by_type(date)         
-    {:name => @@current_books.name ,
+    {:name => @@current_books.name , 
+     :obj => @@current_books,
      :children => c,
      :balance => balance_from_children(c) 
       }          
@@ -35,7 +37,7 @@ class Books < ActiveRecord::Base
   
   def accounts_by_type(date)             
     retval = {};                                      
-    %w{income expense asset liability}.each do |t|
+    ATYPES.each do |t|
       retval[t] = get_node_for_type(t,date)
     end
     retval
@@ -47,7 +49,7 @@ class Books < ActiveRecord::Base
       c[a.name] = a.state(date)
     }
               
-    {:name => @@current_books.name ,
+    {:name => t ,
      :children => c,
      :balance => balance_from_children(c) 
     }           

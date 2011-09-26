@@ -25,9 +25,10 @@ class Account < ActiveRecord::Base
     balance_from_jes(Je.get_jes(self.id),date)
   end
 
-  def state(date)
+  def state(date = Date.new(Time.now.year, Time.now.month, Time.now.day))
     c = child_hash         
-    {:name => self.name ,
+    {:name => self.name,
+     :obj => self,
      :children => c,
      :balance => balance_from_jes(c,date) 
       }

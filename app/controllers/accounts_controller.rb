@@ -2,17 +2,21 @@ class AccountsController < ApplicationController
   
   def index
     @title = "Chart of Accounts"     
-    @alist = accounts_by_type
+    # @alist = accounts_by_type     
+    @alist = Books.current.state[:children]
+#    STDERR.puts @alist.inspect   
   end       
 
   def updatelist                   
     @title = "Choose an Account to Edit" 
-    @alist = accounts_by_type    
+    #@alist = accounts_by_type 
+    @alist = Books.current.state[:children]       
   end               
   
   def deletelist                   
     @title = "Choose an Account to Delete" 
-    @alist = accounts_by_type    
+   # @alist = accounts_by_type
+   @alist = Books.current.state[:children]              
   end
   
   def show
@@ -71,12 +75,13 @@ class AccountsController < ApplicationController
   
   private
   
-  def accounts_by_type             
-    retval = {};                                      
-    %w{income expense asset liability}.each do |t|
-      retval[t] = Account.where(:atype => t)
-    end
-    retval
-  end
+  # def accounts_by_type             
+  #   # retval = {};                                      
+  #   # Books::ATYPES.each do |t|
+  #   #   retval[t] = Account.where(:atype => t)
+  #   # end
+  #   # retval   
+  # 
+  # end    
   
 end
