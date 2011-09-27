@@ -30,8 +30,7 @@ Sb::Application.configure do
   config.assets.debug = true      
   
   if defined?(Footnotes) && Rails.env.development?     
-    STDERR.puts "SETTING UP FOOTNOTES"
-    Footnotes.run! # first of all
+#    Footnotes.run! # first of all
 
     # Footnotes.setup do |config|
     #   config.before {|controller, filter| filter.notes = controller.class.name =~ /Message/ && \

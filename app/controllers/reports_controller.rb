@@ -17,4 +17,15 @@ class ReportsController < ApplicationController
     @total_liabilities = @liabilities[:balance] - @owners_equity      
   end
 
+  def pandl 
+    @title = "Income Statement"         
+    
+    s = Books.current.state
+    c = s[:children]     
+    @income = c["income"]             
+    @expense = c["expense"]             
+    
+    @net_income = @income[:balance] + @expense[:balance]
+  end
+
 end

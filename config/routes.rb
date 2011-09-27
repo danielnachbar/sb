@@ -3,6 +3,8 @@ Sb::Application.routes.draw do
   get "books/new"
 
   get "reports/balancesheet"
+  get "reports/pandl"
+
 
   resources :jes  do
     get 'deletelist', :on => :collection       
