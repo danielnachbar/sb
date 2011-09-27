@@ -1,4 +1,25 @@
+
+
 <h1>Balance Sheet</h1>
+<pre>
 <div class="report">    
-	This should be red and monospaced.
-</div>
+
+	<div class="report_heading">Assets</div>
+		
+	<% @assets[:children].each {  |k,v|   %>   
+	<%= "%-20s" % v[:name].titleize %><%= "%20s" % to_money(v[:balance])%>
+	<% } %>      
+	<div class="report_heading"><%= "%-20s" % "Total Assets" %><%= "%20s" % to_money(@assets[:balance]) %></div>
+	
+	<div class="report_heading">Liabilities</div>
+		
+	<% @liabilities[:children].each {  |k,v|   %>   
+	<%= "%-20s" % v[:name].titleize %><%= "%20s" % to_money(-v[:balance])%>
+	<% } %>      
+	<div class="report_heading"><%= "%-20s" % "Total Liabilities" %><%= "%20s" % to_money(-@liabilities[:balance]) %></div>	
+	<div class="report_heading"><%= "%-20s" % "Owner's Equity" %><%= "%20s" % to_money(@owners_equity) %></div>	
+	<div class="report_heading"><%= "%-20s" % "Liab. plus Equity" %><%= "%20s" % to_money(-@total_liabilities) %></div>	
+	 
+</div>	
+         
+</pre>

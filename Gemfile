@@ -6,7 +6,7 @@ gem 'sqlite3'
 
 gem 'money'
 
-gem 'blueprint-rails'
+gem 'blueprint-rails'        
  
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,7 +20,8 @@ gem 'jquery-rails'
 
 group :development do
   gem 'rspec-rails', '2.6.1'
-  gem 'annotate', '2.4.0'
+  gem 'annotate', '2.4.0' 
+  gem 'rails-footnotes', '>= 3.7'
 end
 
 group :test do
