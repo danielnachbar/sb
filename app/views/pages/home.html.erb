@@ -12,7 +12,7 @@
 
 
 <table class="front_page_table">
-	<tr><td>Accounts</td><td>Journal Entries</td></tr>        
+	<tr><td>Accounts</td><td>Journal Entries</td><td>Reports</td></tr>        
   <tr>
 	<td>
 	  <%= link_to  "Chart of Accounts" , accounts_path %>       
@@ -21,6 +21,12 @@
 	<td>
 	  <%= link_to  "All Journal Entries" , jes_path %>       
 	</td>	
+
+	
+	<td>
+	  <%= link_to  "Balance Sheet" , '/reports/balancesheet' %>       
+	</td>	
+
 	
   </tr> 
   <tr>

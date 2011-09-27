@@ -70,6 +70,12 @@ describe PagesController do
                                          :content => "Delete Journal Entry")                                               
     end                 
     
+    it "should have a link to the Balance Sheet" do
+      get 'home'
+      response.should have_selector('a', :href => '/reports/balancesheet',
+                                         :content => "Balance Sheet")                                               
+    end
+
     
   end
 

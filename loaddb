@@ -60,12 +60,12 @@ Je.create!(:debit   => Account.find_by_name("savings").id,
            :amount  => 50000 ,
            :date    => Date.new(2011, 8, 1),
            :comment => "stash some cash"        
-                      )
+                      )            
 
 Je.create!(:debit   => Account.find_by_name("checking").id,
            :credit  => Account.find_by_name("interest income").id,
            :amount  => 10 ,
-           :date    => Date.new(2011, 10, 1),
+           :date    => Date.new(2011, 9, 16),
            :comment => "interest from savings account"        
                       )
 
@@ -86,13 +86,14 @@ Je.create!(:debit   => Account.find_by_name("telephone").id,
 Je.create!(:debit   => Account.find_by_name("checking").id,
            :credit  => Account.find_by_name("sales").id,
            :amount  => 500000 ,
-           :date    => Date.new(2011, 10, 1),
+           :date    => Date.new(2011, 9, 17),
            :comment => "sold a bunch"        
                       )
 
 Je.create!(:debit   => Account.find_by_name("rent").id,
            :credit  => Account.find_by_name("checking").id,
            :amount  => 30000 ,
-           :date    => Date.new(2011, 10, 1),
+           :date    => Date.new(2011, 9, 18),
            :comment => "office rent"        
                                             )            
+                                             

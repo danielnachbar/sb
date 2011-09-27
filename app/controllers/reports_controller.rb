@@ -1,4 +1,4 @@
-require 'reports_helper'
+#require 'reports_helper'
 
 # include ReportsHelper
 

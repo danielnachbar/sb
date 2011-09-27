@@ -21,7 +21,7 @@ class Account < ActiveRecord::Base
                     :length   => { :maximum => 50 }
 
 
-  def balance(date)    
+  def balance(date = Date.new(Time.now.year, Time.now.month, Time.now.day))    
     balance_from_jes(Je.get_jes(self.id),date)
   end
 

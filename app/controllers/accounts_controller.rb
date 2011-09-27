@@ -21,7 +21,8 @@ class AccountsController < ApplicationController
   
   def show
     @account = Account.find(params[:id])
-    @title = @account.name
+    @title = @account.name   
+    @state = @account.state
   end
   
   def new
