@@ -4,6 +4,8 @@
 
 class ReportsController < ApplicationController   
 
+  def index
+  end
     
   def balancesheet 
     @title = "Balance Sheet"         

@@ -1,9 +1,11 @@
 Sb::Application.routes.draw do
         
   get "books/new"
-
-  get "reports/balancesheet"
-  get "reports/pandl"
+  
+  resources :reports do
+    get "balancesheet", :on => :collection
+    get "pandl"       , :on => :collection
+  end
 
 
   resources :jes  do
