@@ -81,9 +81,14 @@ nav ul li a:hover {
 	-moz-border-radius: 20px; border-radius: 20px;
 }   
 
-.front_page_table {
+.home_table {
 	width:100%;
+} 
+
+.home_thead {
+	font-weight:bold;
 }
+
 /* Sign up button */
 
 a.signup_button {

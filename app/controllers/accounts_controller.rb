@@ -46,23 +46,13 @@ class AccountsController < ApplicationController
     @title = "Edit " + @account.name.titleize    
   end      
 
-  # if @user.update_attributes(params[:user])
-  #   redirect_to @user, :flash => { :success => "Profile updated." }
-  # else
-  #   @title = "Edit user"
-  #   render 'edit'
-  # end   
-
   def update    
-#    STDERR.puts "in UPDATE "              
        
     @account = Account.find(params[:id])      
     if @account.update_attributes(params[:account])  
-#      STDERR.puts "in IF"              
                                 
       redirect_to @account, :flash => { :success => "Account #{@account.name.titleize} Updated!" }
     else
-#      STDERR.puts "in ELSE"              
       @title = "Edit Account"
       render :edit
     end    
@@ -71,18 +61,7 @@ class AccountsController < ApplicationController
   def destroy
     @account = Account.find(params[:id]) 
     @account.destroy
-    redirect_to deletelist_accounts_path, :flash => { :success => "Account destroyed." }         
+    redirect_to accounts_path, :flash => { :success => "Account destroyed." }         
   end  
-  
-  private
-  
-  # def accounts_by_type             
-  #   # retval = {};                                      
-  #   # Books::ATYPES.each do |t|
-  #   #   retval[t] = Account.where(:atype => t)
-  #   # end
-  #   # retval   
-  # 
-  # end    
   
 end

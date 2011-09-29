@@ -1,10 +1,16 @@
 
 <% if ((defined? flash[:success]) && (/Account .* created/ =~ flash[:success])) %>   
-<p> <%= link_to "Create Another Account", new_account_path %></p>       
+<p> <%= link_to "Create Another Account", new_account_path %></p>  
+
 <% end%>
 
 <h1>Account: <%= @title.titleize %></h1>       
 
 <h3> Type: <%= @account.atype.titleize %></h3>
                    
-<h3> Type: <%= @state[:balance] %></h3>
+<h3> Balance: <%= int_to_money @state[:balance] %></h3>
+             
+<p> <%= link_to "Edit", edit_account_path(@account) %> </p>             
+
+<p> <%= link_to "Delete ", @account, :method => :delete, :confirm => "You sure?",
+                      :title => "Delete #{@account.name}" %>        </p>
