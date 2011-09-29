@@ -1,14 +1,6 @@
-
-
-<p> <%= link_to "Create Account", new_account_path %></p>     
-
 <h1>  Chart of Accounts  </h1>  
                             
 <% @accountlist_type = "basic" %>
 <%= render "accountlist" %>
 
-
-  <%# if current_user.admin? %>
-  <%#= link_to "delete", user, :method => :delete, :confirm => "You sure?",
-                              :title => "Delete #{user.name}" %>
-  <%# end %>
+<p> <%= link_to "Create Account", new_account_path %></p>     

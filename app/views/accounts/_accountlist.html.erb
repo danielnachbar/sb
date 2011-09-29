@@ -1,22 +1,23 @@
-<% @alist.each do |t, l|%>
-  <ul class="accounts">        
-    <h3> <%= t.capitalize %> </h3>
-	<% l[:children].each do |c| %>
-	<% a = c[1][:obj] %>     	 
-	  <li>  
-		<% case @accountlist_type %>   
-		  <% when "delete" %>
-	        <%= link_to "Delete " + a.name.titleize, a, :method => :delete, :confirm => "You sure?",
-	                              :title => "Delete #{a.name}" %>  
-		  <% when "update" %>
-			<%= link_to "Edit " + a.name.titleize, edit_account_path(a) %>	
-	     
-		  <% else %>    
-	        <%= link_to a.name.titleize, a %> <%= int_to_money(a.balance)%>		 
-		<% end %>        
-	  </li>	   
-	<% end %>
+<table class="account_table">
 
-  </ul>
+<% @alist.each do |t, l|%>
+    <tr><td class="account_table_atype"> <%= t.capitalize %> </td></tr>
+
+		<% l[:children].each do |c| %>
+		  <tr>
+			<% a = c[1][:obj] %>     	 
+				<% case @accountlist_type %>   
+				  <% when "delete" %>
+			        <td></td><td><%= link_to "Delete " + a.name.titleize, a, :method => :delete, :confirm => "You sure?",
+			                              :title => "Delete #{a.name}" %>  </td>
+				  <% when "update" %>
+					<td></td><td><%= link_to "Edit " + a.name.titleize, edit_account_path(a) %>	</td>
+	     
+				  <% else %>    
+			        <td></td><td> <%= link_to a.name.titleize, a %>  </td><td class="account_table_balance"> <%= sign_corrected_balance(a)%>	 </td>    
+				<% end %>        
+          </tr>		   
+		<% end %>
                    
-<% end %>
+<% end %>    
+</table>

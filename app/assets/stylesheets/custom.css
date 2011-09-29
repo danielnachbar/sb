@@ -89,6 +89,15 @@ nav ul li a:hover {
 	font-weight:bold;
 }
 
+.account_table_atype {
+	font-weight:bold;
+} 
+
+.account_table_balance {
+	text-align:right;
+}
+
+
 /* Sign up button */
 
 a.signup_button {
