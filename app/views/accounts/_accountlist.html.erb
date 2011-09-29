@@ -14,7 +14,8 @@
 					<td></td><td><%= link_to "Edit " + a.name.titleize, edit_account_path(a) %>	</td>
 	     
 				  <% else %>    
-			        <td></td><td> <%= link_to a.name.titleize, a %>  </td><td class="account_table_balance"> <%= sign_corrected_balance(a)%>	 </td>    
+			        <td></td><td> <%= link_to a.name.titleize, a %>  </td>
+			        <td class="account_table_balance"> <%= int_to_money sign_corrected_balance a %>	 </td>    
 				<% end %>        
           </tr>		   
 		<% end %>

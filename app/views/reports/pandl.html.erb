@@ -5,14 +5,14 @@
 	<div class="report_heading">Income</div>
 		
 	<% @income[:children].each {  |k,v|   %>   
-	<%= ("%-20s" % v[:name].titleize %><%= "%20s" % int_to_money(-v[:balance])) unless 0 == v[:balance]%>
+	<%= "%-20s" % v[:name].titleize %><%= "%20s" % int_to_money(-v[:balance])%>
 	<% } %>      
 	<div class="report_heading"><%= "%-20s" % "Total Income" %><%= "%20s" % int_to_money(-@income[:balance]) %></div>
 	
 	<div class="report_heading">Expenses</div>
 		
 	<% @expense[:children].each {  |k,v|   %>   
-	<%= ("%-20s" % v[:name].titleize %><%= "%20s" % int_to_money(v[:balance])) unless 0 == v[:balance] %>
+	<%= "%-20s" % v[:name].titleize %><%= "%20s" % int_to_money(v[:balance]) %>
 	<% } %>                                                  
 	
 	<div class="report_heading"><%= "%-20s" % "Total Expense" %><%= "%20s" % int_to_money(@expense[:balance]) %></div>

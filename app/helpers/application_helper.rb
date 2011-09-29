@@ -11,11 +11,11 @@ module ApplicationHelper
   def sign_corrected_balance(a)        
     case a.atype
     when "income"   
-      return int_to_money(-a.balance)
+      return -a.balance
     when "liability"
-      return int_to_money(-a.balance)
+      return -a.balance
     end                
-    int_to_money(a.balance)
+    a.balance
   end
   
 end
